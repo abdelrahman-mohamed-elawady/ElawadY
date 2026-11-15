@@ -29,6 +29,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
         <!-- Main Stylesheet -->
         <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link href="https://fonts.googleapis.com/css2?family=Estonia&display=swap" rel="stylesheet" />
     </head>
     <body>
         <header class="header" role="banner">
@@ -47,14 +51,17 @@
 
                 <!-- Logo -->
                 <a class="navbar__logo-link" href="#" aria-label="LUXIEV Home">
-                    <img class="navbar__logo" src="/assets/images/logos/logo.svg" alt="LUXIEV" />
+                    <img class="navbar__logo" src="/logo.svg" alt="LUXIEV" />
                 </a>
 
-               <div class="header__actions">
-    <button class="header__search" type="button" aria-label="Search">
-        <i data-lucide="search" class="icon-search" aria-hidden="true"></i>
-    </button>
-</div>
+                <div class="header__actions">
+                    <a
+                        class="header__email"
+                        href="mailto:abdelrahman.mohamed.elawady@email.com"
+                        aria-label="Send an email">
+                        <i data-lucide="send" class="icon-email" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </header>
         <main>
@@ -69,15 +76,6 @@
                         <source data-src="assets/uxiev.webm" type="video/webm" />
                     </video>
                     <video class="stage__video" data-index="2" muted loop playsinline preload="none">
-                        <source data-src="assets/uxiev.webm" type="video/webm" />
-                    </video>
-                    <video class="stage__video" data-index="3" muted loop playsinline preload="none">
-                        <source data-src="assets/uxiev.webm" type="video/webm" />
-                    </video>
-                    <video class="stage__video" data-index="4" muted loop playsinline preload="none">
-                        <source data-src="assets/uxiev.webm" type="video/webm" />
-                    </video>
-                    <video class="stage__video" data-index="5" muted loop playsinline preload="none">
                         <source data-src="assets/uxiev.webm" type="video/webm" />
                     </video>
                 </div>
@@ -96,11 +94,7 @@
                     <div class="stage__cards-track-wrap">
                         <div class="stage__cards-track" id="stage__cards-track">
                             <article class="stage__card" data-index="0">
-                                <img
-                                    src="assets/images/luxiev.webp"
-                                    alt="Project preview"
-                                    class="stage__card-image"
-                                    loading="lazy" />
+                                <img src="/2.png" alt="Project preview" class="stage__card-image" loading="lazy" />
                                 <div class="stage__card-overlay">
                                     <a
                                         href="https://luxiev-maison.vercel.app/"
@@ -112,9 +106,9 @@
                                     </a>
                                 </div>
                             </article>
-                              <article class="stage__card" data-index="0">
+                            <article class="stage__card" data-index="0">
                                 <img
-                                    src="assets/images/luxiev.webp"
+                                    src="/furniture-homepage.webp"
                                     alt="Project preview"
                                     class="stage__card-image"
                                     loading="lazy" />
@@ -130,7 +124,7 @@
                                 </div>
                             </article>
                             <article class="stage__card" data-index="1">
-                                <img src="assets/images/luxiev.webp" alt="" class="stage__card-image" loading="lazy" />
+                                <img src="/lighting-homepage.webp" alt="" class="stage__card-image" loading="lazy" />
                                 <div class="stage__card-overlay">
                                     <a href="#" target="_blank" rel="noopener" class="stage__card-link">
                                         Visit Website
@@ -144,24 +138,24 @@
                 </div>
             </section>
 
-          <section id="trust" class="trust">
-    <div class="trust__content">
-        <h2 class="trust__title">We are Elawady</h2>
+            <section id="trust" class="trust">
+                <div class="trust__content">
+                    <h2 class="trust__title">What We are</h2>
 
-        <p class="trust__description">
-            Every creation begins with a vision Every vision begins with a feeling We give the unseen a
-            presence and the intangible a form Where ideas become experiences and experiences become
-            something that lasts
-        </p>
+                    <p class="trust__description">
+                        Every creation begins with a vision Every vision begins with a feeling We give the unseen a
+                        presence and the intangible a form Where ideas become experiences and experiences become
+                        something that lasts
+                    </p>
 
-        <p class="trust__signature">Elawady</p>
-    </div>
-</section>
+                    <p class="trust__signature">Elawady</p>
+                </div>
+            </section>
             <!-- ============================================================
                  WORK — horizontally scrollable project slider
                  ============================================================ -->
             <section id="work" class="work">
-                <img class="work__img" src="assets/images/luxiev.webp" />
+                <img class="work__img" src="/3.webp" />
 
                 <div class="work__container">
                     <div class="slider">
@@ -173,7 +167,7 @@
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/furniture-homepage.webp"
                                         alt="Project preview"
                                         class="slider__card-image" />
                                     <div class="slider__card-overlay">
@@ -187,7 +181,7 @@
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/lighting-homepage.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -205,7 +199,7 @@
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/skincare-homepage.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -222,11 +216,21 @@
                             </article>
                             <article class="slider__card" data-category="personal">
                                 <div class="slider__card-media">
-                                    <img
-                                        src="assets/images/luxiev.webp"
-                                        alt="Project preview"
-                                        loading="lazy"
-                                        class="slider__card-image" />
+                                    <img src="/2.png" alt="Project preview" loading="lazy" class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="landing page">
+                                <div class="slider__card-media">
+                                    <img src="/2.png" alt="Project preview" loading="lazy" class="slider__card-image" />
                                     <div class="slider__card-overlay">
                                         <a href="#" target="_blank" rel="noopener" class="slider__card-link">
                                             Visit Website
@@ -241,25 +245,7 @@
                             <article class="slider__card" data-category="landing page">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
-                                        alt="Project preview"
-                                        loading="lazy"
-                                        class="slider__card-image" />
-                                    <div class="slider__card-overlay">
-                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
-                                            Visit Website
-                                            <i
-                                                data-lucide="arrow-up-right"
-                                                class="icon-external"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="slider__card" data-category="landing page">
-                                <div class="slider__card-media">
-                                    <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/fashion-homepage.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -277,7 +263,7 @@
                             <article class="slider__card" data-category="websites">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/lighting-homepage.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -295,7 +281,7 @@
                             <article class="slider__card" data-category="websites">
                                 <div class="slider__card-media">
                                     <img
-                                        src="assets/images/luxiev.webp"
+                                        src="/lighting-homepage.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -362,30 +348,33 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="our-story" aria-labelledby="our-story-title">
                 <div class="our-story__content">
                     <div class="our-story__statement">
-                        <p id="our-story-title">Elawady عبدالرحمن</p>
+                        <span class="our-story__label">Fuonder - CEO</span>
 
-                        <span class="our-story__description">
-                            Leading ideas from vision to creation
-                        </span>
+                        <h2 id="our-story-title">
+                            Elawady
+                            <span class="our-story__arabic">عبدالرحمن</span>
+                        </h2>
+
+                        <p class="our-story__description">Leading ideas from vision to creation</p>
                     </div>
+
                     <div class="our-story__image">
-                        <img src="assets/images/me.jpg" alt="Fashion campaign" loading="lazy" />
+                        <img src="/me.jpg" alt="Abdelrahman Elawady" loading="lazy" />
                     </div>
                 </div>
             </section>
-            
         </main>
 
         <footer class="site-footer">
             <div class="site-footer__top">
                 <div class="site-footer__brand">
-                    <img class="site-footer__logo" src="/assets/images/logos/logo-footer.svg" alt="LUXIEV" />
+                    <img class="site-footer__logo" src="/logo-footer.svg" alt="LUXIEV" />
 
-                    <p class="site-footer__tagline">The Details Tell The Story &amp; Every Details Matters</p>
+                    <p class="site-footer__tagline">The Details Tell The Story s</p>
                 </div>
 
                 <div class="site-footer__social">
@@ -393,7 +382,7 @@
 
                     <div class="site-footer__icons">
                         <a
-                            href="https://instagram.com/"
+                            href="https://instagram.com/abdelrhmanelawady"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Instagram">
@@ -403,34 +392,38 @@
                                     d="M7.03 0.08C5.75 0.14 4.88 0.34 4.12 0.65C3.33 0.96 2.66 1.37 2 2.04C1.34 2.71 0.93 3.38 0.62 4.17C0.32 4.94 0.12 5.81 0.06 7.09C0 8.37 -0.01 8.78 0 12.04C0.01 15.3 0.02 15.71 0.08 16.99C0.14 18.27 0.34 19.14 0.65 19.9C0.96 20.69 1.37 21.36 2.04 22.02C2.71 22.68 3.38 23.09 4.17 23.4C4.94 23.7 5.81 23.9 7.09 23.96C8.37 24.02 8.78 24.03 12.04 24.02C15.3 24.01 15.71 24 16.99 23.94C18.27 23.88 19.14 23.68 19.9 23.37C20.69 23.06 21.36 22.65 22.02 21.98C22.68 21.31 23.09 20.64 23.4 19.85C23.7 19.08 23.9 18.21 23.96 16.93C24.02 15.65 24.03 15.24 24.02 11.98C24.01 8.72 24 8.31 23.94 7.03C23.88 5.75 23.68 4.88 23.37 4.12C23.06 3.33 22.65 2.66 21.98 2C21.31 1.34 20.64 0.93 19.85 0.62C19.08 0.32 18.21 0.12 16.93 0.06C15.65 0 15.24 -0.01 11.98 0C8.72 0.01 8.31 0.02 7.03 0.08ZM7.17 21.96C6 21.91 5.36 21.71 4.94 21.55C4.38 21.33 3.98 21.07 3.56 20.65C3.14 20.23 2.88 19.83 2.66 19.27C2.5 18.85 2.3 18.21 2.25 17.04C2.19 15.78 2.18 15.4 2.17 12.03C2.16 8.66 2.17 8.28 2.23 7.02C2.28 5.85 2.48 5.21 2.64 4.79C2.86 4.23 3.12 3.83 3.54 3.41C3.96 2.99 4.36 2.73 4.92 2.51C5.34 2.35 5.98 2.15 7.15 2.1C8.41 2.04 8.79 2.03 12.16 2.02C15.53 2.01 15.91 2.02 17.17 2.08C18.34 2.13 18.98 2.33 19.4 2.49C19.96 2.71 20.36 2.97 20.78 3.39C21.2 3.81 21.46 4.21 21.68 4.77C21.84 5.19 22.04 5.83 22.09 7C22.15 8.26 22.16 8.64 22.17 12.01C22.18 15.38 22.17 15.76 22.11 17.02C22.06 18.19 21.86 18.83 21.7 19.25C21.48 19.81 21.22 20.21 20.8 20.63C20.38 21.05 19.98 21.31 19.42 21.53C19 21.69 18.36 21.89 17.19 21.94C15.93 22 15.55 22.01 12.18 22.02C8.81 22.03 8.43 22.02 7.17 21.96ZM17.2 5.58C17.2 6.37 17.84 7.01 18.63 7.01C19.42 7.01 20.06 6.37 20.06 5.58C20.06 4.79 19.42 4.15 18.63 4.15C17.84 4.15 17.2 4.79 17.2 5.58ZM5.84 12C5.84 15.4 8.6 18.16 12 18.16C15.4 18.16 18.16 15.4 18.16 12C18.16 8.6 15.4 5.84 12 5.84C8.6 5.84 5.84 8.6 5.84 12ZM8 12C8 9.79 9.79 8 12 8C14.21 8 16 9.79 16 12C16 14.21 14.21 16 12 16C9.79 16 8 14.21 8 12Z" />
                             </svg>
                         </a>
+
                         <a
-                            href="https://pinterest.com/"
+                            href="https://wa.me/201012647771"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Pinterest">
+                            aria-label="WhatsApp">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path
                                     fill="currentColor"
-                                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z" />
+                                    d="M20.52 3.48A11.87 11.87 0 0 0 12.07 0C5.5 0 .16 5.34.15 11.91c0 2.1.55 4.15 1.6 5.96L0 24l6.29-1.65a11.9 11.9 0 0 0 5.78 1.47h.01c6.57 0 11.91-5.34 11.92-11.91a11.85 11.85 0 0 0-3.48-8.43ZM12.08 21.8a9.9 9.9 0 0 1-5.04-1.38l-.36-.21-3.73.98.99-3.64-.24-.37a9.86 9.86 0 0 1-1.52-5.27c0-5.46 4.44-9.9 9.9-9.9a9.83 9.83 0 0 1 7 2.9 9.84 9.84 0 0 1 2.9 7c0 5.46-4.44 9.9-9.9 9.9Zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
                             </svg>
                         </a>
                     </div>
                 </div>
             </div>
         </footer>
+
         <div class="nav-dropdown" id="dropdownMenu">
             <div class="nav-dropdown__wrapper">
-                <!-- Featured projects preview -->
+                <!-- Featured Projects -->
                 <div class="nav-dropdown__products">
                     <h2 class="nav-dropdown__quick-links-title">Main</h2>
+
                     <div class="product-grid product-grid--scroll">
                         <a href="#" class="product-card">
                             <div class="product-card__image">
-                                <img src="/assets/images/luxiev.webp" alt="VERD Botanical Atelier website" />
+                                <img src="/assets/images/luxiev.webp" alt="website" />
                             </div>
+
                             <div class="product-card__info">
-                                <h4 class="product-card__name">VERD — Botanical Atelier</h4>
-                                <span class="product-card__price">E-commerce · Fragrance</span>
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
 
@@ -438,9 +431,10 @@
                             <div class="product-card__image">
                                 <img src="/assets/images/luxiev.webp" alt="Corporate website project" />
                             </div>
+
                             <div class="product-card__info">
-                                <h4 class="product-card__name">Northgate Consulting</h4>
-                                <span class="product-card__price">Corporate · Consulting</span>
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
 
@@ -448,96 +442,24 @@
                             <div class="product-card__image">
                                 <img src="/assets/images/luxiev.webp" alt="Portfolio website project" />
                             </div>
-                            <div class="product-card__info">
-                                <h4 class="product-card__name">Studio Marin</h4>
-                                <span class="product-card__price">Portfolio · Architecture</span>
-                            </div>
-                        </a>
 
-                        <a href="#" class="product-card">
-                            <div class="product-card__image">
-                                <img src="/assets/images/luxiev.webp" alt="VERD Botanical Atelier website" />
-                            </div>
                             <div class="product-card__info">
-                                <h4 class="product-card__name">VERD — Botanical Atelier</h4>
-                                <span class="product-card__price">E-commerce · Fragrance</span>
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Navigation Links -->
+                <nav class="nav-dropdown__quick-links">
+                    <a href="#work" class="nav-dropdown__quick-link"> Work </a>
+
+                    <a href="#trust" class="nav-dropdown__quick-link"> About Us </a>
+                </nav>
             </div>
         </div>
 
-        <!-- ============================================================
-             WIZARD MODAL
-             3-step "New Project" request flow, opened from the Work
-             section's CTA card and the "Start Your Project" button.
-             ============================================================ -->
-        <div
-            class="wizard-overlay"
-            id="wizard-overlay"
-            role="dialog"
-            aria-modal="true"
-            aria-label="New project request">
-            <div class="wizard">
-                <div class="wizard__indicator">
-                    <div class="wizard__dot" id="dot-1"></div>
-                    <div class="wizard__dot" id="dot-2"></div>
-                    <div class="wizard__dot" id="dot-3"></div>
-                </div>
-                <!-- Step 1: choose a project type -->
-                <div class="wizard__step active" id="step-1">
-                    <p class="wizard__label">1 Of 3</p>
-                    <h2 class="wizard__title">What kind of Website</h2>
-                    <div class="wizard__types">
-                        <button class="wizard__type" data-type="E-Commerce">
-                            <span class="wizard__type-icon" aria-hidden="true">🛍️</span>
-                            <span class="wizard__type-name">E-Commerce</span>
-                        </button>
-                        <button class="wizard__type" data-type="Portfolio">
-                            <span class="wizard__type-icon" aria-hidden="true">🎨</span>
-                            <span class="wizard__type-name">Portfolio</span>
-                        </button>
-                        <button class="wizard__type" data-type="Landing Page">
-                            <span class="wizard__type-icon" aria-hidden="true">🚀</span>
-                            <span class="wizard__type-name">Landing Page</span>
-                        </button>
-                        <button class="wizard__type" data-type="SaaS">
-                            <span class="wizard__type-icon" aria-hidden="true">⚙️</span>
-                            <span class="wizard__type-name">SaaS</span>
-                        </button>
-                        <button class="wizard__type" data-type="Educational">
-                            <span class="wizard__type-icon" aria-hidden="true">📚</span>
-                            <span class="wizard__type-name">Educational</span>
-                        </button>
-                        <button class="wizard__type" data-type="Other">
-                            <span class="wizard__type-icon" aria-hidden="true">💡</span>
-                            <span class="wizard__type-name">Other</span>
-                        </button>
-                    </div>
-                    <button class="wizard__next" id="next-1" disabled>Next</button>
-                </div>
-                <!-- Step 2: contact details -->
-                <div class="wizard__step" id="step-2">
-                    <p class="wizard__label">2 of 3</p>
-                    <h2 class="wizard__title">Tell me a bit about you</h2>
-                    <input class="wizard__input" id="input-name" type="text" placeholder="Your Name" />
-                    <input class="wizard__input" id="input-project" type="text" placeholder="Project Idea" />
-                    <input class="wizard__input" id="input-contact" type="text" placeholder="WhatsApp" />
-                    <button class="wizard__next" id="next-2" disabled>Send Request</button>
-                </div>
-                <!-- Step 3: confirmation -->
-                <div class="wizard__step" id="step-3">
-                    <div class="wizard__success">
-                        <div class="wizard__success-icon" aria-hidden="true">✓</div>
-                        <h2 class="wizard__success-title">Request Sent</h2>
-                        <p class="wizard__success-text">
-                            Thanks for reaching out — we'll get back to you shortly to discuss your project
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Script -->
         <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
         <script src="script.js"></script>
