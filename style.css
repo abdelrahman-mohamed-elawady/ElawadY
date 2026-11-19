@@ -1,7 +1,7 @@
 :root {
     --font-Inter: "Inter", sans-serif;
     --card-width: 190px;
-    --card-height: 150px;
+    --card-height: 145px;
 }
 
 @media (min-width: 1024px) {
