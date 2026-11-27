@@ -107,7 +107,7 @@ main {
     z-index: 1000;
 
     width: 100%;
-    height: 40px;
+    height: 36px;
 
     background-color: transparent;
     box-shadow: none;
@@ -249,9 +249,7 @@ main {
     }
 }
 
-/* ════════════════════════════════════════════════════════════
-   7. STAGE SECTION
-   ════════════════════════════════════════════════════════════ */
+/* ===== STAGE ===== */
 
 .stage {
     position: relative;
@@ -260,13 +258,9 @@ main {
     overflow: hidden;
 }
 
-/* Background Video */
-
 .stage__videos {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .stage__video {
@@ -274,10 +268,8 @@ main {
     inset: 0;
     width: 100%;
     height: 100%;
-
     object-fit: cover;
     opacity: 0;
-
     transition: opacity 0.8s ease;
     pointer-events: none;
 }
@@ -286,40 +278,25 @@ main {
     opacity: 1;
 }
 
-/* Overlay */
-
 .stage__scrim {
     position: absolute;
     inset: 0;
-
     background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 10%, transparent 100%);
-
     z-index: 1;
     pointer-events: none;
 }
 
-/* Content */
-
 .stage__content {
     position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
+    inset: 0;
     z-index: 2;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     text-align: center;
     color: #fff;
-
     padding: 0 20px;
-
     animation: fadeInUp 1.5s ease forwards;
     pointer-events: none;
 }
@@ -341,17 +318,12 @@ main {
 
 .stage__cta {
     pointer-events: all;
-
     padding: 7px 20px;
-
     border: 1px solid #fff;
-
     font-weight: 300;
     letter-spacing: 3px;
-
     background: transparent;
     color: #fff;
-
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -361,151 +333,34 @@ main {
     color: #111;
 }
 
-/* Stage Cards */
-
-.stage__cards {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    z-index: 2;
-}
-
-.stage__cards .material-symbols-outlined {
-    color: #fff;
-}
-
-.stage__cards-track-wrap {
-    width: 100%;
-    overflow: hidden;
-}
-
-.stage__cards-track {
-    display: flex;
-    gap: 5px;
-
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-
-    padding: 15px 10px;
-    width: 100%;
-
-    -webkit-overflow-scrolling: touch;
-}
-
-.stage__cards-track::-webkit-scrollbar {
-    display: none;
-}
-
-/* Stage Card */
-
-.stage__card {
-    flex: 0 0 var(--card-width);
-    width: var(--card-width);
-    height: var(--card-height);
-
-    background-color: #faf9f6;
-    position: relative;
-    overflow: hidden;
-
-    scroll-snap-align: center;
-    box-shadow: var(--shadow-card);
-
-    transform: scale(0.95);
-    opacity: 0.6;
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        opacity 0.3s ease;
-}
-
-.stage__card.is-active {
-    border-color: #fff;
-    opacity: 1;
-}
-
-.stage__card:hover {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.stage__card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.stage__card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 16%;
-
-    background: rgba(0, 0, 0, 0.4);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.stage__card:hover .stage__card-overlay {
-    opacity: 1;
-}
-
-.stage__card-link {
-    color: #fff;
-    font-size: 13px;
-    text-decoration: none;
-
-    display: flex;
-    align-items: center;
-    gap: 7px;
-}
-
-.icon-external {
-    width: 16px;
-    height: 16px;
-    stroke-width: 1;
-}
-
-/* Stage Dots */
+/* Dots */
 
 .stage__dots {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    width: 100%;
+    z-index: 2;
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    gap: 5px;
-    padding-bottom: 15px;
+    gap: 6px;
 }
 
 .stage__dot {
     width: 28px;
     height: 1px;
-
     border: 0;
-
+    padding: 0;
     background: rgba(255, 255, 255, 0.45);
-
     cursor: pointer;
-
-    transition:
-        width 0.3s ease,
-        background 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .stage__dot.is-active {
     background: #fff;
 }
 
-/* Stage Desktop */
+/* Desktop */
 
 @media (min-width: 1024px) {
     .stage__content {
@@ -519,9 +374,8 @@ main {
     }
 
     .stage__content p {
-        font-size: 16px;
-        letter-spacing: 1.5px;
         margin-bottom: 32px;
+        letter-spacing: 1.5px;
     }
 
     .stage__cta {
@@ -530,35 +384,10 @@ main {
         font-size: 13px;
     }
 
-    .stage__cards {
-        padding-bottom: 30px;
-    }
-
-    .stage__cards-track {
-        gap: 20px;
-        padding: 16px 40px;
-    }
-
-    .stage__card {
-        flex-basis: 340px;
-        height: 260px;
-    }
-
-    .stage__card-overlay {
-        height: 20%;
-    }
-
-    .stage__card-link {
-        font-size: 15px;
-        gap: 9px;
-    }
-
-    .icon-external {
-        width: 18px;
-        height: 18px;
+    .stage__dots {
+        bottom: 36px;
     }
 }
-
 /* ════════════════════════════════════════════════════════════
    8. TRUST SECTION
    ════════════════════════════════════════════════════════════ */
