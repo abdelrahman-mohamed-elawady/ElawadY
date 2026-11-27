@@ -29,10 +29,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
         <!-- Main Stylesheet -->
         <link rel="stylesheet" href="style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-        <link href="https://fonts.googleapis.com/css2?family=Estonia&display=swap" rel="stylesheet" />
     </head>
     <body>
         <header class="header" role="banner">
@@ -66,76 +62,24 @@
         </header>
         <main>
             <section id="stage" class="stage">
-                <!-- Background video stack: only the `.is-active` video is
-                     visible/playing; others are lazily loaded (see script.js) -->
                 <div class="stage__videos">
-                    <video class="stage__video is-active" data-index="0" autoplay muted loop playsinline>
-                        <source src="assets/videos/.webm" type="video/webm" />
+                    <video class="stage__video is-active" muted playsinline preload="auto">
+                        <source src="assets/videos/video-1.webm" type="video/webm" />
                     </video>
-                    <video class="stage__video" data-index="1" muted loop playsinline preload="none">
-                        <source data-src="assets/uxiev.webm" type="video/webm" />
-                    </video>
-                    <video class="stage__video" data-index="2" muted loop playsinline preload="none">
-                        <source data-src="assets/uxiev.webm" type="video/webm" />
+                    <video class="stage__video" muted playsinline preload="none">
+                        <source data-src="assets/videos/video-2.webm" type="video/webm" />
                     </video>
                 </div>
 
-                <!-- Darkening overlay for text legibility -->
                 <div class="stage__scrim"></div>
 
                 <div class="stage__content">
                     <h1>Make Your Website</h1>
                     <p>Elevate Your Brand</p>
-                    <button id="stage-cta" class="stage__cta">Explore Now</button>
+                    <button id="stage-cta" class="stage__cta" type="button">Explore Now</button>
                 </div>
 
-                <!-- Project cards, pinned to the bottom of the stage -->
-                <div class="stage__cards">
-                    <div class="stage__cards-track-wrap">
-                        <div class="stage__cards-track" id="stage__cards-track">
-                            <article class="stage__card" data-index="0">
-                                <img src="/2.png" alt="Project preview" class="stage__card-image" loading="lazy" />
-                                <div class="stage__card-overlay">
-                                    <a
-                                        href="https://luxiev-maison.vercel.app/"
-                                        target="_blank"
-                                        rel="noopener"
-                                        class="stage__card-link">
-                                        Visit Website
-                                        <i data-lucide="arrow-up-right" class="icon-external" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </article>
-                            <article class="stage__card" data-index="0">
-                                <img
-                                    src="/6.jpg"
-                                    alt="Project preview"
-                                    class="stage__card-image"
-                                    loading="lazy" />
-                                <div class="stage__card-overlay">
-                                    <a
-                                        href="https://luxiev-maison.vercel.app/"
-                                        target="_blank"
-                                        rel="noopener"
-                                        class="stage__card-link">
-                                        Visit Website
-                                        <i data-lucide="arrow-up-right" class="icon-external" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </article>
-                            <article class="stage__card" data-index="1">
-                                <img src="/4.jpg" alt="" class="stage__card-image" loading="lazy" />
-                                <div class="stage__card-overlay">
-                                    <a href="#" target="_blank" rel="noopener" class="stage__card-link">
-                                        Visit Website
-                                        <i data-lucide="arrow-up-right" class="icon-external" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="stage__dots" id="stage-dots"></div>
-                    </div>
-                </div>
+                <div class="stage__dots" id="stage-dots"></div>
             </section>
 
             <section id="trust" class="trust">
@@ -148,26 +92,26 @@
                         something that lasts
                     </p>
 
-                    <p class="trust__signature">Elawady</p>
+                    <p class="trust__signature">عlawady</p>
                 </div>
             </section>
             <!-- ============================================================
                  WORK — horizontally scrollable project slider
                  ============================================================ -->
             <section id="work" class="work">
-                <img class="work__img" src="/6.jpg" />
+                <img class="work__img" src="1.jpg" />
 
                 <div class="work__container">
                     <div class="slider">
                         <div class="work__content">
                             <h2 class="work__title">Work</h2>
-                            <p class="work__text">Selected Works</p>
+                            <p class="work__text">Where intention takes shape</p>
                         </div>
                         <div class="slider__track" id="slider__track">
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/2.png"
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         class="slider__card-image" />
                                     <div class="slider__card-overlay">
@@ -181,7 +125,7 @@
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/furniture-homepage.webp"
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -199,7 +143,7 @@
                             <article class="slider__card" data-category="E-commerce">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/6.jpg"
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -216,21 +160,11 @@
                             </article>
                             <article class="slider__card" data-category="personal">
                                 <div class="slider__card-media">
-                                    <img src="/2.png" alt="Project preview" loading="lazy" class="slider__card-image" />
-                                    <div class="slider__card-overlay">
-                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
-                                            Visit Website
-                                            <i
-                                                data-lucide="arrow-up-right"
-                                                class="icon-external"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="slider__card" data-category="landing page">
-                                <div class="slider__card-media">
-                                    <img src="/4.jpg" alt="Project preview" loading="lazy" class="slider__card-image" />
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
                                     <div class="slider__card-overlay">
                                         <a href="#" target="_blank" rel="noopener" class="slider__card-link">
                                             Visit Website
@@ -245,7 +179,25 @@
                             <article class="slider__card" data-category="landing page">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/fashion-homepage.webp"
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="landing page">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -263,7 +215,7 @@
                             <article class="slider__card" data-category="websites">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/lighting-homepage.webp"
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -281,7 +233,7 @@
                             <article class="slider__card" data-category="websites">
                                 <div class="slider__card-media">
                                     <img
-                                        src="/lighting-homepage.webp"
+                                        src="assets/images/luxiev.webp"
                                         alt="Project preview"
                                         loading="lazy"
                                         class="slider__card-image" />
@@ -352,14 +304,12 @@
             <section class="our-story" aria-labelledby="our-story-title">
                 <div class="our-story__content">
                     <div class="our-story__statement">
-                        <span class="our-story__label">Fuonder - CEO</span>
-
                         <h2 id="our-story-title">
                             Elawady
                             <span class="our-story__arabic">عبدالرحمن</span>
                         </h2>
 
-                        <p class="our-story__description">Leading ideas from vision to creation</p>
+                        <p class="our-story__description">Fuonder - CEO</p>
                     </div>
 
                     <div class="our-story__image">
