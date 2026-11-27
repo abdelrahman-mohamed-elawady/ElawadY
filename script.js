@@ -196,718 +196,128 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 /* =========================================================
-   Stage
+   Stage: 2 videos, dots, auto-advance when a video ends
    ========================================================= */
 
 const stageSection = document.getElementById("stage");
 const stageCta = document.getElementById("stage-cta");
 const workSection = document.getElementById("work");
-const stageCardsTrack = document.getElementById("stage__cards-track");
-const stageCards = document.querySelectorAll(".stage__card");
 const stageVideos = document.querySelectorAll(".stage__video");
 const stageDotsWrap = document.getElementById("stage-dots");
 
-/* =========================================================
-   CTA
-   ========================================================= */
+let stageCurrent = 0;
+let stageVisible = false;
+let stageSwitching = false;
 
-function scrollToWork(e) {
-  if (!stageCta || !workSection) return;
+/* ---------- CTA ---------- */
 
+stageCta?.addEventListener("click", (e) => {
+  if (!workSection) return;
   e.preventDefault();
 
-  const headerOffset = header?.offsetHeight || 0;
-  const elementPosition = workSection.getBoundingClientRect().top;
+  const headerOffset = document.querySelector("header")?.offsetHeight || 0;
+  const top = workSection.getBoundingClientRect().top + window.scrollY - headerOffset;
 
-  const offsetPosition = elementPosition + window.scrollY - headerOffset;
+  window.scrollTo({ top, behavior: "smooth" });
+});
 
-  window.scrollTo({
-    top: offsetPosition,
-    behavior: "smooth"
-  });
-}
+/* ---------- Dots: one per video ---------- */
 
-stageCta?.addEventListener("click", scrollToWork);
-
-/* =========================================================
-   Stage State
-   ========================================================= */
-
-let stageCurrentIndex = 0;
-
-let stageAutoTimer = null;
-let stageScrollEndTimer = null;
-let stageCenterScrollTimer = null;
-
-let stageIsScrolling = false;
-let stageIsVisible = false;
-let stageIsSwitching = false;
-
-/* =========================================================
-   Video State
-   ========================================================= */
-
-/*
- * Videos that have already received their real src.
- *
- * WeakSet is perfect here because the key is the actual
- * HTMLVideoElement.
- */
-const stageLoadedVideos = new WeakSet();
-
-/*
- * Save the last playback position of every video.
- *
- * Example:
- *
- * video #1 → 4.73s
- * video #2 → 8.21s
- * video #3 → 2.14s
- */
-const stageVideoTimes = new WeakMap();
-
-/* =========================================================
-   Dots
-   ========================================================= */
-
-stageCards.forEach((_, index) => {
+stageVideos.forEach((_, i) => {
   const dot = document.createElement("button");
-
   dot.type = "button";
-  dot.className = "stage__dot" + (index === 0 ? " is-active" : "");
-
-  dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
-
-  dot.addEventListener("click", () => {
-    goToStageCard(index);
-  });
-
+  dot.className = "stage__dot" + (i === 0 ? " is-active" : "");
+  dot.setAttribute("aria-label", `Go to video ${i + 1}`);
+  dot.addEventListener("click", () => goToStage(i));
   stageDotsWrap?.appendChild(dot);
 });
 
 const stageDots = document.querySelectorAll(".stage__dot");
 
-/* =========================================================
-   Load Video — ONLY ONCE
-   ========================================================= */
+/* ---------- Lazy load (once) ---------- */
 
-function loadStageVideo(index) {
-  const video = stageVideos[index];
-
-  if (!video) return;
-
-  /*
-   * Already loaded?
-   *
-   * Do absolutely nothing.
-   *
-   * This prevents video.load() from being called again.
-   */
-  if (stageLoadedVideos.has(video)) {
-    return;
-  }
-
+function loadStageVideo(video) {
   const source = video.querySelector("source[data-src]");
+  if (!source) return;
 
-  if (!source) {
-    /*
-     * The video may already have a normal src.
-     * Consider it loaded.
-     */
-    stageLoadedVideos.add(video);
-    return;
-  }
-
-  const src = source.dataset.src;
-
-  if (!src) return;
-
-  /*
-   * Assign the real source only once.
-   */
-  source.src = src;
-
+  source.src = source.dataset.src;
   source.removeAttribute("data-src");
-
-  /*
-   * load() is called ONLY the first time.
-   */
   video.load();
-
-  stageLoadedVideos.add(video);
 }
 
-/* =========================================================
-   Save Video Position
-   ========================================================= */
-
-function saveStageVideoTime(video) {
-  if (!video) return;
-
-  const currentTime = video.currentTime;
-
-  if (Number.isFinite(currentTime) && currentTime >= 0) {
-    stageVideoTimes.set(video, currentTime);
-  }
+function playStageVideo(video) {
+  const promise = video.play();
+  if (promise !== undefined) promise.catch(() => {});
 }
 
-/* =========================================================
-   Restore Video Position
-   ========================================================= */
+/* ---------- Switch ---------- */
 
-function restoreStageVideoTime(video) {
-  if (!video) return;
+function goToStage(index) {
+  if (index === stageCurrent || stageSwitching) return;
 
-  const savedTime = stageVideoTimes.get(video);
+  const prev = stageVideos[stageCurrent];
+  const next = stageVideos[index];
+  if (!next) return;
 
-  if (typeof savedTime !== "number" || !Number.isFinite(savedTime)) {
-    return;
-  }
+  stageSwitching = true;
+  loadStageVideo(next);
+  loadStageVideo(stageVideos[(index + 1) % stageVideos.length]); // preload the one after
 
-  /*
-   * Restore only when the metadata is available.
-   */
-  if (video.readyState >= 1) {
-    try {
-      video.currentTime = savedTime;
-    } catch (error) {
-      // Ignore browser timing errors.
-    }
-  }
-}
+  const run = () => {
+    next.currentTime = 0;
+    next.classList.add("is-active");
+    prev.classList.remove("is-active");
 
-/* =========================================================
-   Stop Video
-   ========================================================= */
-
-/*
- * Used when switching FROM one card TO another.
- *
- * Important:
- * We reset currentTime here intentionally because
- * a newly selected card should start from 0.
- */
-function stopStageVideo(video) {
-  if (!video) return;
-
-  /*
-   * Save position before stopping.
-   *
-   * This means if we ever return to this exact video,
-   * its last position is still known.
-   */
-  saveStageVideoTime(video);
-
-  video.pause();
-
-  /*
-   * New card starts from beginning.
-   */
-  try {
-    video.currentTime = 0;
-  } catch (error) {
-    // Ignore browser timing errors.
-  }
-
-  /*
-   * Since we intentionally reset this video,
-   * remove the saved position.
-   */
-  stageVideoTimes.delete(video);
-
-  video.classList.remove("is-active");
-}
-
-/* =========================================================
-   Play Video
-   ========================================================= */
-
-function playStageVideo(video, restorePosition = true) {
-  if (!video) return;
-
-  if (!stageIsVisible) return;
-
-  /*
-   * Restore the previous position when returning
-   * to a paused Stage.
-   */
-  if (restorePosition) {
-    restoreStageVideoTime(video);
-  }
-
-  video.classList.add("is-active");
-
-  const playPromise = video.play();
-
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {});
-  }
-}
-
-/* =========================================================
-   Go To Stage Card
-   ========================================================= */
-
-function goToStageCard(index) {
-  if (!stageIsVisible) return;
-
-  if (!stageCards.length || !stageVideos.length) {
-    return;
-  }
-
-  if (index < 0 || index >= stageCards.length) {
-    return;
-  }
-
-  if (index === stageCurrentIndex) {
-    return;
-  }
-
-  if (stageIsSwitching) {
-    return;
-  }
-
-  const previousIndex = stageCurrentIndex;
-
-  const previousVideo = stageVideos[previousIndex];
-
-  const nextVideo = stageVideos[index];
-
-  if (!nextVideo) return;
-
-  stageIsSwitching = true;
-
-  /* -----------------------------------------------------
-       Load requested video once
-       ----------------------------------------------------- */
-
-  loadStageVideo(index);
-
-  /* -----------------------------------------------------
-       Preload next video once
-       ----------------------------------------------------- */
-
-  const preloadIndex = (index + 1) % stageVideos.length;
-
-  if (preloadIndex !== index) {
-    loadStageVideo(preloadIndex);
-  }
-
-  /* -----------------------------------------------------
-       Switch
-       ----------------------------------------------------- */
-
-  const switchNow = () => {
-    /*
-     * User may have left Stage while video was loading.
-     */
-    if (!stageIsVisible) {
-      stageIsSwitching = false;
-      return;
-    }
-
-    /*
-     * Stop previous video.
-     *
-     * This intentionally resets the previous card
-     * because selecting it again should start from 0.
-     */
-    if (previousVideo && previousVideo !== nextVideo) {
-      stopStageVideo(previousVideo);
-    }
-
-    /* Card state */
-
-    stageCards[previousIndex]?.classList.remove("is-active");
-
-    stageCards[index]?.classList.add("is-active");
-
-    /* Dot state */
-
-    stageDots[previousIndex]?.classList.remove("is-active");
-
+    stageDots[stageCurrent]?.classList.remove("is-active");
     stageDots[index]?.classList.add("is-active");
 
-    /* Current index */
+    stageCurrent = index;
+    stageSwitching = false;
 
-    stageCurrentIndex = index;
+    if (stageVisible) playStageVideo(next);
 
-    /*
-     * New card ALWAYS starts from 0.
-     */
-    try {
-      nextVideo.currentTime = 0;
-    } catch (error) {
-      // Ignore browser timing errors.
-    }
-
-    /*
-     * No saved position because this is a new
-     * card selection.
-     */
-    stageVideoTimes.delete(nextVideo);
-
-    /*
-     * Play new video.
-     *
-     * restorePosition = false because this is
-     * a deliberate card change.
-     */
-    playStageVideo(nextVideo, false);
-
-    /* Center card */
-
-    centerStageCard(index);
-
-    stageIsSwitching = false;
+    // Pause the old video after the fade-out finishes
+    setTimeout(() => {
+      if (prev !== stageVideos[stageCurrent]) {
+        prev.pause();
+        prev.currentTime = 0;
+      }
+    }, 800);
   };
 
-  /* -----------------------------------------------------
-       Video already ready
-       ----------------------------------------------------- */
-
-  if (nextVideo.readyState >= 3) {
-    switchNow();
-    return;
-  }
-
-  /* -----------------------------------------------------
-       Wait until video can play
-       ----------------------------------------------------- */
-
-  nextVideo.addEventListener("canplay", switchNow, { once: true });
+  if (next.readyState >= 3) run();
+  else next.addEventListener("canplay", run, { once: true });
 }
 
-/* =========================================================
-   Center Card
-   ========================================================= */
+/* ---------- Events ---------- */
 
-function centerStageCard(index) {
-  if (!stageCardsTrack || !stageCards[index]) {
-    return;
-  }
-
-  stageIsScrolling = true;
-
-  const card = stageCards[index];
-
-  const offset = card.offsetLeft - stageCardsTrack.offsetWidth / 2 + card.offsetWidth / 2;
-
-  stageCardsTrack.scrollTo({
-    left: offset,
-    behavior: "smooth"
+// When a video ends, go to the next one (loops back to the first)
+stageVideos.forEach((video, i) => {
+  video.addEventListener("ended", () => {
+    if (i !== stageCurrent) return;
+    goToStage((i + 1) % stageVideos.length);
   });
+});
 
-  clearTimeout(stageCenterScrollTimer);
-
-  stageCenterScrollTimer = setTimeout(() => {
-    stageIsScrolling = false;
-    stageCenterScrollTimer = null;
-  }, 600);
-}
-
-/* =========================================================
-   Auto Advance
-   ========================================================= */
-
-function startStageAuto() {
-  if (!stageIsVisible) return;
-
-  if (stageAutoTimer) return;
-
-  stageAutoTimer = setInterval(() => {
-    if (!stageIsVisible) {
-      stopStageAuto();
-      return;
-    }
-
-    const next = (stageCurrentIndex + 1) % stageCards.length;
-
-    goToStageCard(next);
-  }, 5000);
-}
-
-function stopStageAuto() {
-  if (!stageAutoTimer) return;
-
-  clearInterval(stageAutoTimer);
-
-  stageAutoTimer = null;
-}
-
-/* =========================================================
-   Detect Center Card
-   ========================================================= */
-
-function getCardInCenter() {
-  if (!stageCardsTrack || !stageCards.length) {
-    return 0;
-  }
-
-  const trackCenter = stageCardsTrack.scrollLeft + stageCardsTrack.offsetWidth / 2;
-
-  let closest = 0;
-  let minDistance = Infinity;
-
-  stageCards.forEach((card, index) => {
-    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-
-    const distance = Math.abs(trackCenter - cardCenter);
-
-    if (distance < minDistance) {
-      minDistance = distance;
-      closest = index;
-    }
-  });
-
-  return closest;
-}
-/* =========================================================
-   Manual Card Scroll
-   ========================================================= */
-
-stageCardsTrack?.addEventListener(
-  "scroll",
-  () => {
-    if (!stageIsVisible) return;
-
-    if (stageIsScrolling) return;
-
-    clearTimeout(stageScrollEndTimer);
-
-    /* ---------------------------------------------
-       Detect card currently closest to center
-       --------------------------------------------- */
-
-    const centered = getCardInCenter();
-
-    /* Update dot immediately */
-
-    stageDots.forEach((dot, index) => {
-      dot.classList.toggle("is-active", index === centered);
-    });
-
-    /* ---------------------------------------------
-       Wait until scrolling stops
-       --------------------------------------------- */
-
-    stageScrollEndTimer = setTimeout(() => {
-      stageScrollEndTimer = null;
-
-      const currentIndex = getCardInCenter();
-
-      if (currentIndex === stageCurrentIndex || stageIsSwitching) {
-        return;
-      }
-
-      const previousIndex = stageCurrentIndex;
-
-      const previousVideo = stageVideos[previousIndex];
-      const currentVideo = stageVideos[currentIndex];
-
-      if (!currentVideo) return;
-
-      /* Load selected video */
-
-      loadStageVideo(currentIndex);
-
-      /* Stop previous video */
-
-      if (previousVideo && previousVideo !== currentVideo) {
-        stopStageVideo(previousVideo);
-      }
-
-      /* ---------------------------------------------
-         Card state
-         --------------------------------------------- */
-
-      stageCards[previousIndex]?.classList.remove("is-active");
-
-      stageCards[currentIndex]?.classList.add("is-active");
-
-      /* ---------------------------------------------
-         Dot state
-         --------------------------------------------- */
-
-      stageDots.forEach((dot, index) => {
-        dot.classList.toggle("is-active", index === currentIndex);
-      });
-
-      /* ---------------------------------------------
-         Update current index
-         --------------------------------------------- */
-
-      stageCurrentIndex = currentIndex;
-
-      /* ---------------------------------------------
-         New video starts from beginning
-         --------------------------------------------- */
-
-      try {
-        currentVideo.currentTime = 0;
-      } catch (error) {
-        // Ignore browser timing errors.
-      }
-
-      stageVideoTimes.delete(currentVideo);
-
-      /* Play selected video */
-
-      playStageVideo(currentVideo, false);
-    }, 150);
-  },
-  { passive: true }
-);
-
-/* =========================================================
-   Hover / Touch
-   ========================================================= */
-
-stageCardsTrack?.addEventListener("mouseenter", stopStageAuto);
-
-stageCardsTrack?.addEventListener("mouseleave", startStageAuto);
-
-stageCardsTrack?.addEventListener("touchstart", stopStageAuto, { passive: true });
-
-stageCardsTrack?.addEventListener(
-  "touchend",
-  () => {
-    if (stageIsVisible) {
-      startStageAuto();
-    }
-  },
-  { passive: true }
-);
-
-/* =========================================================
-   Pause Stage
-   ========================================================= */
-
-function pauseStage() {
-  stageIsVisible = false;
-
-  stopStageAuto();
-
-  /*
-   * IMPORTANT:
-   *
-   * We DO NOT:
-   *
-   * video.load()
-   * video.currentTime = 0
-   *
-   * We only pause and save the current position.
-   */
-
-  stageVideos.forEach((video) => {
-    if (!video) return;
-
-    saveStageVideoTime(video);
-
-    video.pause();
-  });
-}
-
-/* =========================================================
-   Resume Stage
-   ========================================================= */
-
-function resumeStage() {
-  if (!stageSection) return;
-
-  stageIsVisible = true;
-
-  const activeVideo = stageVideos[stageCurrentIndex];
-
-  if (activeVideo) {
-    /*
-     * Restore exact position before playing.
-     */
-    restoreStageVideoTime(activeVideo);
-
-    activeVideo.classList.add("is-active");
-
-    const playPromise = activeVideo.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {});
-    }
-  }
-
-  startStageAuto();
-}
-
-/* =========================================================
-   Intersection Observer
-   ========================================================= */
-
-const stageObserver = new IntersectionObserver(
-  ([entry]) => {
-    if (entry.isIntersecting) {
-      resumeStage();
-    } else {
-      pauseStage();
-    }
-  },
-  {
-    threshold: 0.15
-  }
-);
+/* ---------- Play only while visible ---------- */
 
 if (stageSection) {
-  stageObserver.observe(stageSection);
+  new IntersectionObserver(
+    ([entry]) => {
+      stageVisible = entry.isIntersecting;
+      const active = stageVideos[stageCurrent];
+
+      if (stageVisible) playStageVideo(active);
+      else active.pause();
+    },
+    { threshold: 0.15 }
+  ).observe(stageSection);
 }
 
-/* =========================================================
-   Initial Setup
-   ========================================================= */
+/* ---------- Preload the second video ---------- */
 
 window.addEventListener("load", () => {
-  if (!stageCards.length) {
-    return;
-  }
-
-  const firstVideo = stageVideos[0];
-
-  /* First card */
-
-  stageCards[0]?.classList.add("is-active");
-
-  /* First dot */
-
-  stageDots[0]?.classList.add("is-active");
-
-  /* Load first video ONCE */
-
-  if (firstVideo) {
-    loadStageVideo(0);
-
-    firstVideo.classList.add("is-active");
-  }
-
-  /*
-   * Preload second video ONCE.
-   */
-  if (stageVideos.length > 1) {
-    loadStageVideo(1);
-  }
-
-  /* Center first card */
-
-  centerStageCard(0);
-
-  /*
-   * IMPORTANT:
-   *
-   * Do NOT call:
-   *
-   * firstVideo.play()
-   * startStageAuto()
-   *
-   * here.
-   *
-   * IntersectionObserver controls them.
-   */
+  if (stageVideos[1]) loadStageVideo(stageVideos[1]);
 });
 /* ════════════════════════════════════════════════════════════
    8.TRUST
