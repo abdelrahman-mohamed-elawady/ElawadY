@@ -438,7 +438,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px 15px 40px;
+    padding: 20px 10px;
 }
 
 .work__header {
