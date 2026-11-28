@@ -437,7 +437,7 @@ button {
 .work__inner {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     padding: 20px 10px;
 }
 
@@ -471,6 +471,7 @@ button {
     gap: 10px;
 
     width: 100%;
+   
 
     list-style: none;
     overflow-x: auto;
@@ -564,6 +565,7 @@ button {
     column-gap: 24px;
 
     width: 100%;
+   
 }
 
 .work-controls__counter {
