@@ -1,97 +1,127 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>Elawady</title>
+        <!-- Core Meta -->
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Elawady</title>
-
         <!-- SEO -->
-        <meta name="description" content="Websites, e-commerce stores and landing pages built to elevate your brand." />
-        <meta name="author" content="عبدالرحمن محمد" />
-        <meta name="robots" content="index, follow" />
-        <meta name="theme-color" content="#f6f2ea" />
-
+        <meta name="description" content="Create Websites,Create E-commerce, Create Landind Page." />
         <!-- Open Graph -->
-        <meta property="og:type" content="website" />
         <meta property="og:title" content="LUXIEV" />
         <meta property="og:description" content="Every detail carries meaning" />
         <meta property="og:image" content="https://luxiev.vercel.app/assets/images/luxiev.jpeg" />
+        <meta property="og:type" content="website" />
 
-        <!-- Icons -->
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <meta name="author" content="عبدالرحمن محمد" />
+        <meta name="theme-color" content="#f6f2ea" />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/luxiev.jpeg" />
-
-        <!-- Fonts -->
+        <!-- Performance: Preconnect to font origins -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
-
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet" />
+        <!-- Main Stylesheet -->
         <link rel="stylesheet" href="style.css" />
+ 
     </head>
-
     <body>
-        <header class="header">
+        <header class="header" role="banner">
             <div class="header__container">
+                <!-- Menu -->
                 <button
-                    class="header__menu-btn"
-                    id="nav-toggle"
+                    class="navbar__menu-btn"
+                    id="navbarMenuBtn"
                     type="button"
                     aria-label="Menu"
-                    aria-controls="nav-menu"
+                    aria-controls="dropdownMenu"
                     aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </button>
 
-                <a class="header__logo-link" href="#" aria-label="LUXIEV Home">
-                    <img class="header__logo" src="/logo.svg" alt="LUXIEV" />
+                <!-- Logo -->
+                <a class="navbar__logo-link" href="#" aria-label="LUXIEV Home">
+                    <img class="navbar__logo" src="/logo.svg" alt="LUXIEV" />
                 </a>
 
-                <a class="header__email" href="mailto:abdelrahman.mohamed.elawady@email.com" aria-label="Send an email">
-                    <svg
-                        class="header__icon"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true">
-                        <path d="m22 2-7 20-4-9-9-4Z" />
-                        <path d="M22 2 11 13" />
-                    </svg>
-                </a>
+                <div class="header__actions">
+                    <a
+                        class="header__email"
+                        href="mailto:abdelrahman.mohamed.elawady@email.com"
+                        aria-label="Send an email">
+                        <i data-lucide="send" class="icon-email" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </header>
-
         <main>
-            <!-- Stage -->
             <section id="stage" class="stage">
+                <!-- Background video stack: only the `.is-active` video is
+                     visible/playing; others are lazily loaded (see script.js) -->
                 <div class="stage__videos">
-                    <video class="stage__video is-active" muted playsinline preload="auto">
-                        <source src="assets/videos/video-1.webm" type="video/webm" />
+                    <video class="stage__video is-active" data-index="0" autoplay muted loop playsinline>
+                        <source src="assets/videos/.webm" type="video/webm" />
                     </video>
-                    <video class="stage__video" muted playsinline preload="none">
-                        <source data-src="assets/videos/video-2.webm" type="video/webm" />
+                    <video class="stage__video" data-index="1" muted loop playsinline preload="none">
+                        <source data-src="assets/uxiev.webm" type="video/webm" />
+                    </video>
+                    <video class="stage__video" data-index="2" muted loop playsinline preload="none">
+                        <source data-src="assets/uxiev.webm" type="video/webm" />
                     </video>
                 </div>
 
+                <!-- Darkening overlay for text legibility -->
                 <div class="stage__scrim"></div>
 
                 <div class="stage__content">
                     <h1>Make Your Website</h1>
                     <p>Elevate Your Brand</p>
-                    <button id="stage-cta" class="stage__cta" type="button">Explore Now</button>
+                    <button id="stage-cta" class="stage__cta">Explore Now</button>
                 </div>
 
-                <div class="stage__dots" id="stage-dots"></div>
+                <!-- Project cards, pinned to the bottom of the stage -->
+                <div class="stage__cards">
+                    <div class="stage__cards-track-wrap">
+                        <div class="stage__cards-track" id="stage__cards-track">
+                            <article class="stage__card" data-index="0">
+                                <img src="/2.png" alt="Project preview" class="stage__card-image" loading="lazy" />
+                                <div class="stage__card-overlay">
+                                    <a
+                                        href="https://luxiev-maison.vercel.app/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="stage__card-link">
+                                        Visit Website
+                                        <i data-lucide="arrow-up-right" class="icon-external" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </article>
+                            
+                            <article class="stage__card" data-index="1">
+                                <img src="/4.jpg" alt="" class="stage__card-image" loading="lazy" />
+                                <div class="stage__card-overlay">
+                                    <a href="#" target="_blank" rel="noopener" class="stage__card-link">
+                                        Visit Website
+                                        <i data-lucide="arrow-up-right" class="icon-external" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="stage__dots" id="stage-dots"></div>
+                    </div>
+                </div>
             </section>
 
-            <!-- Trust -->
             <section id="trust" class="trust">
                 <div class="trust__content">
-                    <h2 class="trust__title">What We Are</h2>
+                    <h2 class="trust__title">What We are</h2>
 
                     <p class="trust__description">
                         Every creation begins with a vision Every vision begins with a feeling We give the unseen a
@@ -102,268 +132,222 @@
                     <p class="trust__signature">ElawadY</p>
                 </div>
             </section>
-
-            <!-- Work -->
-            <section id="work" class="work" aria-labelledby="work-title">
-                <img class="work__banner" src="5.jpg" alt="" loading="lazy" />
-
-                <div class="work__inner">
-                    <header class="work__header">
-                        <h2 class="work__title" id="work-title">Work</h2>
-                        <p class="work__subtitle">Where intention takes shape</p>
-                    </header>
-
-                    <ul class="work__track" id="work-track">
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img class="work-card__image" src="2.png" alt="" loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img
-                                    class="work-card__image"
-                                    src="4.jpg"
-                                    alt="E-commerce project preview"
-                                    loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img
-                                    class="work-card__image"
-                                    src="5.jpg"
-                                    alt="E-commerce project preview"
-                                    loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img
-                                    class="work-card__image"
-                                    src="6.jpg"
-                                    alt="Personal website preview"
-                                    loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img class="work-card__image" src="2.png" alt="Landing page preview" loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img class="work-card__image" src="4.jpg" alt="Landing page preview" loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img class="work-card__image" src="5.jpg" alt="Website preview" loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="work-card">
-                            <div class="work-card__media">
-                                <img class="work-card__image" src="6.jpg" alt="Website preview" loading="lazy" />
-                                <div class="work-card__overlay">
-                                    <a class="work-card__link" href="#" target="_blank" rel="noopener">
-                                        Visit Website
-                                        <svg
-                                            class="work-card__icon"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            aria-hidden="true">
-                                            <path d="M7 7h10v10" />
-                                            <path d="M7 17 17 7" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <div class="work-controls">
-                        <p class="work-controls__counter" aria-live="polite">
-                            <span id="work-current">01</span>
-                            <span class="work-controls__separator">/</span>
-                            <span id="work-total">08</span>
-                        </p>
-
-                        <div class="work-controls__progress">
-                            <div class="work-controls__progress-fill" id="work-progress"></div>
+            <!-- ============================================================
+                 WORK — horizontally scrollable project slider
+                 ============================================================ -->
+              <section id="work" class="work">
+              
+                <div class="work__container">
+                    <div class="slider">
+                        <div class="work__content">
+                            <h2 class="work__title">Work</h2>
+                            <p class="work__text">Where intention takes shape</p>
                         </div>
-
-                        <div class="work-controls__arrows">
-                            <button
-                                type="button"
-                                class="work-controls__arrow"
-                                data-work-dir="-1"
-                                aria-label="Previous project">
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1"
-                                    aria-hidden="true"
-                                    focusable="false">
-                                    <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                            <button
-                                type="button"
-                                class="work-controls__arrow"
-                                data-work-dir="1"
-                                aria-label="Next project">
-                                <svg
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1"
-                                    aria-hidden="true"
-                                    focusable="false">
-                                    <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
+                        <div class="slider__track" id="slider__track">
+                            <article class="slider__card" data-category="E-commerce">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="E-commerce">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="E-commerce">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="personal">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="landing page">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="landing page">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="websites">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                            <article class="slider__card" data-category="websites">
+                                <div class="slider__card-media">
+                                    <img
+                                        src="assets/images/luxiev.webp"
+                                        alt="Project preview"
+                                        loading="lazy"
+                                        class="slider__card-image" />
+                                    <div class="slider__card-overlay">
+                                        <a href="#" target="_blank" rel="noopener" class="slider__card-link">
+                                            Visit Website
+                                            <i
+                                                data-lucide="arrow-up-right"
+                                                class="icon-external"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="slider__controls">
+                            <div class="slider__counter">
+                                <span id="slider-current">01</span>
+                                <span class="slider__counter-separator">/</span>
+                                <span id="slider-total">10</span>
+                            </div>
+                            <div class="slider__progress-wrap">
+                                <div class="slider__progress-track">
+                                    <div class="slider__progress-fill" id="work-progress"></div>
+                                </div>
+                            </div>
+                            <div class="slider__arrows">
+                                <button
+                                    type="button"
+                                    class="slider__arrow slider__arrow--prev"
+                                    onclick="scrollSlider(-1)"
+                                    aria-label="Scroll left">
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1"
+                                        aria-hidden="true"
+                                        focusable="false">
+                                        <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button
+                                    type="button"
+                                    class="slider__arrow slider__arrow--next"
+                                    onclick="scrollSlider(1)"
+                                    aria-label="Scroll right">
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1"
+                                        aria-hidden="true"
+                                        focusable="false">
+                                        <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Our story -->
             <section class="our-story" aria-labelledby="our-story-title">
                 <div class="our-story__content">
                     <div class="our-story__statement">
-                        <h2 class="our-story__title" id="our-story-title">
+         
+
+                        <h2 id="our-story-title">
                             Elawady
-                            <span class="our-story__arabic" lang="ar">عبدالرحمن</span>
+                            <span class="our-story__arabic">عبدالرحمن</span>
                         </h2>
 
-                        <p class="our-story__role">Founder - CEO</p>
+                        <p class="our-story__description">Fuonder - CEO</p>
                     </div>
 
                     <div class="our-story__image">
@@ -377,11 +361,12 @@
             <div class="site-footer__top">
                 <div class="site-footer__brand">
                     <img class="site-footer__logo" src="/logo-footer.svg" alt="LUXIEV" />
-                    <p class="site-footer__tagline">The Details Tell The Story</p>
+
+                    <p class="site-footer__tagline">The Details Tell The Story s</p>
                 </div>
 
                 <div class="site-footer__social">
-                    <p class="site-footer__heading">Follow Us</p>
+                    <p class="site-footer__heading">Follow US</p>
 
                     <div class="site-footer__icons">
                         <a
@@ -412,52 +397,59 @@
             </div>
         </footer>
 
-        <!-- Navigation dropdown -->
-        <div class="nav-dropdown" id="nav-menu">
-            <div class="nav-dropdown__inner">
-                <div class="nav-projects">
-                    <h2 class="nav-dropdown__title">Projects</h2>
+        <div class="nav-dropdown" id="dropdownMenu">
+            <div class="nav-dropdown__wrapper">
+                <!-- Featured Projects -->
+                <div class="nav-dropdown__products">
+                    <h2 class="nav-dropdown__quick-links-title">Main</h2>
 
-                    <div class="nav-projects__track">
-                        <a href="#" class="nav-project">
-                            <div class="nav-project__image">
-                                <img src="/assets/images/luxiev.webp" alt="E-commerce website project" loading="lazy" />
+                    <div class="product-grid product-grid--scroll">
+                        <a href="#" class="product-card">
+                            <div class="product-card__image">
+                                <img src="/assets/images/luxiev.webp" alt="website" />
                             </div>
-                            <div class="nav-project__info">
-                                <h3 class="nav-project__name">Website</h3>
-                                <span class="nav-project__category">E-commerce</span>
+
+                            <div class="product-card__info">
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
 
-                        <a href="#" class="nav-project">
-                            <div class="nav-project__image">
-                                <img src="/assets/images/luxiev.webp" alt="Corporate website project" loading="lazy" />
+                        <a href="#" class="product-card">
+                            <div class="product-card__image">
+                                <img src="/assets/images/luxiev.webp" alt="Corporate website project" />
                             </div>
-                            <div class="nav-project__info">
-                                <h3 class="nav-project__name">Website</h3>
-                                <span class="nav-project__category">E-commerce</span>
+
+                            <div class="product-card__info">
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
 
-                        <a href="#" class="nav-project">
-                            <div class="nav-project__image">
-                                <img src="/assets/images/luxiev.webp" alt="Portfolio website project" loading="lazy" />
+                        <a href="#" class="product-card">
+                            <div class="product-card__image">
+                                <img src="/assets/images/luxiev.webp" alt="Portfolio website project" />
                             </div>
-                            <div class="nav-project__info">
-                                <h3 class="nav-project__name">Website</h3>
-                                <span class="nav-project__category">E-commerce</span>
+
+                            <div class="product-card__info">
+                                <h4 class="product-card__name">Website</h4>
+                                <span class="product-card__price"> E-commerce </span>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <nav class="nav-dropdown__links" aria-label="Primary">
-                    <a href="#work" class="nav-dropdown__link">Work</a>
-                    <a href="#trust" class="nav-dropdown__link">About Us</a>
+                <!-- Navigation Links -->
+                <nav class="nav-dropdown__quick-links">
+                    <a href="#work" class="nav-dropdown__quick-link"> Work </a>
+
+                    <a href="#trust" class="nav-dropdown__quick-link"> About Us </a>
                 </nav>
             </div>
         </div>
 
+        <!-- Script -->
+        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
         <script src="script.js"></script>
     </body>
 </html>
