@@ -471,7 +471,6 @@ button {
     gap: 10px;
 
     width: 100%;
-   
 
     list-style: none;
     overflow-x: auto;
@@ -565,7 +564,6 @@ button {
     column-gap: 24px;
 
     width: 100%;
-   
 }
 
 .work-controls__counter {
@@ -695,7 +693,7 @@ button {
 
 .our-story__image img {
     width: 100%;
-    aspect-ratio: 5 / 6;
+    aspect-ratio: 5 / 4;
     object-fit: cover;
 
     filter: grayscale(15%);
